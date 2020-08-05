@@ -14,7 +14,7 @@ ui <- fluidPage(
 
 # Server component
 server <- function(input, output) {
-  
+  # Blank
 }
 
 # Run the application
