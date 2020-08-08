@@ -17,13 +17,18 @@ ui <- fluidPage(
         textInput(inputId = "lastname", label = "NAME", placeholder = "Last Name",  width = "50%"),
         textInput(inputId = "firstname", label = "", placeholder = "First Name", width = "50%")
     ),
-    mainPanel("This is the main panel")
+    mainPanel(
+      h4("SUMMARY"),
+      textOutput("name")
+    )
   )
 )
 
 # Server component
 server <- function(input, output) {
-  # Blank
+  output$name <- renderText(
+    paste("Name:", input$firstname, input$lastname)
+  )
 }
 
 # Run the application
