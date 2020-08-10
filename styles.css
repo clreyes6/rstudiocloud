@@ -1,0 +1,12 @@
+@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
+
+h1 {
+  font-family: 'Segoe UI';
+  color: #fff;
+  padding: 10px;
+  background-color: #ED7D31;
+}
+
+body {
+  background-color: #fff;
+}
