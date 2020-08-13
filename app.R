@@ -7,7 +7,7 @@ ui <- fluidPage(
   includeCSS("styles.css"),
 
   # Application title
-  titlePanel(
+  titlePanel(windowTitle = "RApp Newsletter",
     h1("Subscribe to Shiny RApp Newsletter")
        ),
 
