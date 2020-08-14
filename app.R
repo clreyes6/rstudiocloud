@@ -30,7 +30,7 @@ ui <- fluidPage(
         radioButtons(inputId = "sex", label = "SEX", choices = c("Male", "Female"), selected = NULL),
 
         # Marital Status
-        selectInput(inputId = "marital", label = "MARITAL STATUS", choices = c("Single", "Married", "Widowed"), width = "50%")
+        selectizeInput(inputId = "marital", label = "MARITAL STATUS", choices = c("Single", "Married", "Widowed"), selected = NULL, width = "50%", multiple = TRUE, options = list(maxItems = 2))
     ),
     mainPanel(
       h4("SUMMARY"),
