@@ -24,7 +24,7 @@ ui <- fluidPage(
       textInput(inputId = "firstname", label = "", placeholder = "First Name", width = "80%"),
 
       # Birthday
-      dateInput(inputId = "birthday", label = "BIRTHDAY", value = NULL, format = "yyyy-mm-dd", width = "80%"),
+      dateInput(inputId = "birthday", label = "BIRTHDAY", value = 0, min = NULL, max = NULL, format = "yyyy-mm-dd", width = "80%"),
 
       # Sex
       radioButtons(inputId = "sex", label = "SEX", choices = c("Male", "Female"), selected = NULL),
@@ -46,15 +46,36 @@ ui <- fluidPage(
     ),
     mainPanel(
       h4("SUMMARY"),
-      textOutput("name")
+      textOutput("name"),
+      textOutput("birthday"),
+      textOutput("age")
     )
   )
 )
 
+  # Age calculation
+  calc_age <- function(birthDate, refDate = Sys.Date()) {
+    require(lubridate)
+    period <- as.period(interval(birthDate, refDate), unit = "year")
+    period$year
+  }
+  calc_age("1991-04-28")
+
 # Server component
 server <- function(input, output) {
+  # Name output
   output$name <- renderText(
     paste("Name:", input$firstname, input$lastname)
+  )
+
+  # Birthday output
+  output$birthday <- renderText(
+    paste("Birthday:", input$birthday)
+  )
+
+  # Age output
+  output$age <- renderText(
+    paste("Age:", input$birthday)
   )
 }
 
