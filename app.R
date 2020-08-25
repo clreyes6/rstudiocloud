@@ -48,18 +48,13 @@ ui <- fluidPage(
       h4("SUMMARY"),
       textOutput("name"),
       textOutput("birthday"),
-      textOutput("age")
+      textOutput("age"),
+      textOutput("sex"),
+      span("Marital Status:"),
+      textOutput('marital')
     )
   )
 )
-
-  # Age calculation
-  calc_age <- function(birthDate, refDate = Sys.Date()) {
-    require(lubridate)
-    period <- as.period(interval(birthDate, refDate), unit = "year")
-    period$year
-  }
-  calc_age("1991-04-28")
 
 # Server component
 server <- function(input, output) {
@@ -72,10 +67,25 @@ server <- function(input, output) {
   output$birthday <- renderText(
     paste("Birthday:", input$birthday)
   )
-
+  
+  # Age calculation
+  library(eeptools) 
+  calc_age <- age_calc(dob = as.Date('1991-04-28'), units = 'years')
+  absage = round(calc_age, digits = 0)
+  
   # Age output
   output$age <- renderText(
-    paste("Age:", input$birthday)
+    paste("Age:", absage)
+  )
+  
+  # Sex output
+  output$sex <- renderText(
+    paste("Sex:", input$sex)
+  )
+  
+  # Marital status output
+  output$marital <- renderText(
+    paste(input$marital)
   )
 }
 
