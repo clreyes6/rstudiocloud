@@ -51,7 +51,13 @@ ui <- fluidPage(
       textOutput("age"),
       textOutput("sex"),
       span("Marital Status:"),
-      textOutput('marital')
+      textOutput("marital", inline = TRUE),
+      div(),
+      span("Language:"),
+      textOutput("language", inline = TRUE),
+      textOutput("children"),
+      textOutput("workexperience"),
+      textOutput("email")
     )
   )
 )
@@ -67,25 +73,45 @@ server <- function(input, output) {
   output$birthday <- renderText(
     paste("Birthday:", input$birthday)
   )
-  
+
   # Age calculation
   library(eeptools) 
   calc_age <- age_calc(dob = as.Date('1991-04-28'), units = 'years')
   absage = round(calc_age, digits = 0)
-  
+
   # Age output
   output$age <- renderText(
     paste("Age:", absage)
   )
-  
+
   # Sex output
   output$sex <- renderText(
     paste("Sex:", input$sex)
   )
-  
+
   # Marital status output
   output$marital <- renderText(
     paste(input$marital)
+  )
+
+  # Language
+  output$language <- renderText(
+    paste(input$language)
+  )
+
+  # Children
+  output$children <- renderText(
+    paste("Number of Children:", input$children)
+  )
+
+  # Work Experience
+  output$workexperience <- renderText(
+    paste("Work Experience in Years:", input$workexperience)
+  )
+
+  # Email
+  output$email <- renderText(
+    paste("Email Address:", input$email)
   )
 }
 
